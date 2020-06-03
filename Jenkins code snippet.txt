@@ -1,0 +1,59 @@
+//Declarative syntax
+pipeline {
+    agent any
+
+    stages {
+        stage("Build") {
+            steps {
+                echo "Some code compilation here..."
+            }
+        }
+
+        stage("Test") {
+            steps {
+                echo "Some tests execution here..."
+                echo 1
+            }
+        }
+    }
+}
+
+
+
+//Scripted syntax (As you can see, there was no validation of the pipeline code.)
+node {
+    stage("Build") {
+        echo "Some code compilation here..."
+    }
+
+    stage("Test") {
+        echo "Some tests execution here..."
+        echo 1
+    }
+}
+
+
+Restart from stage
+pipeline {
+    agent any
+
+    stages {
+        stage("Build") {
+            steps {
+                echo "Some code compilation here..."
+            }
+        }
+
+        stage("Test") {
+            steps {
+                echo "Some tests execution here..."
+            }
+        }
+        
+        stage("Buils status"){
+            steps {
+            echo "currentBuild.getPreviousBuild().result"
+            }
+        }
+    }
+}
